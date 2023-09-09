@@ -31,14 +31,14 @@ class UserController
             if ($_POST['username'] == $user->username && $_POST['password'] == $user->password) {
                 // Jika cocok, simpan username pengguna dalam session dan set pesan sukses
                 $_SESSION['user'] = $user;
-                $_SESSION['message'] = 'login success';
+                $_SESSION['message'] = 'Login success';
 
                 // Redirect ke halaman home.php
                 header('Location: /home.php');
                 exit();
             } else {
                 // Jika tidak cocok, set pesan login gagal
-                $_SESSION['message'] = 'login failed';
+                $_SESSION['message'] = 'Login failed';
             }
         }
     }

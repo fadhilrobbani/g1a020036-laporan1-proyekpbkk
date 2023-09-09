@@ -36,7 +36,6 @@ if (isset($_SESSION['user'])) {
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form class="space-y-6" method="POST">
                 <!-- Input yang disembunyikan ini berguna agar kita bisa menangkap method post login dengan tepat -->
-                <input name="submit" value="logout" hidden>
                 <input name="submit" value="login" hidden>
                 <div>
                     <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Username</label>
@@ -67,9 +66,12 @@ if (isset($_SESSION['user'])) {
     //Karena kita akan memanggil method login dari kelas UserController
     //maka kita validasi dulu method POST yang dikirim form karena kita tidak menggunakan atribut action dari form
     if ('login' === ($_POST['submit'] ?? false)) {
-        UserController::login();
-    }
-    ?>
+        UserController::login(); ?>
+        <!-- Menampilkan alert jika login gagal -->
+        <div class="fixed top-10 p-4 mb-4 w-1/2 left-1/4 text-sm text-red-800 rounded-lg bg-red-100 text-center " role="alert">
+            <span class="font-medium"><?php echo $_SESSION['message'] ?></span> Change a few things up and try submitting again.
+        </div>
+    <?php } ?>
 
 </body>
 
