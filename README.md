@@ -246,3 +246,5 @@ Berikut adalah beberapa contoh penggunaan OOP di PHP:
 OOP adalah paradigma pemrograman yang powerful yang dapat digunakan untuk membangun aplikasi web yang kompleks dan fleksibel. Dengan memahami konsep OOP, pengembang dapat menulis kode PHP yang lebih baik.
 
 ## 2. Buatlah 4 file PHP wajib OOP dalam 1 folder Contoh form login>tampilan login> isi halaman> logout jelaskan code nya dengan // pada github
+
+(bisa dilihat di folder soal2)
