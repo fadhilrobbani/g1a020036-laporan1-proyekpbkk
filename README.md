@@ -248,3 +248,4 @@ OOP adalah paradigma pemrograman yang powerful yang dapat digunakan untuk memban
 ## 2. Buatlah 4 file PHP wajib OOP dalam 1 folder Contoh form login>tampilan login> isi halaman> logout jelaskan code nya dengan // pada github
 
 (bisa dilihat di folder soal2)
+Untuk menjalankan program, pertama-tama masuk dulu ke direktori "soal2" dengan `cd soal2`. Lalu jalankan perintah `php -S localhost:3000` (pastikan koneksi internet aktif karena file tailwindcss -nya menggunakan cdn)
