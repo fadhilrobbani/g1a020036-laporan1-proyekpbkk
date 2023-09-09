@@ -6,10 +6,6 @@ use Model\User;
 
 class UserController
 {
-    public static function testSay()
-    {
-        return 'hai';
-    }
     public static function getUsers()
     {
         return [

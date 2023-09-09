@@ -5,7 +5,6 @@ use Controller\UserController;
 require_once('UserController.php');
 require_once("User.php");
 session_start();
-session_destroy();
 if (isset($_SESSION['user'])) {
     header('Location: home.php');
     exit();
@@ -28,15 +27,11 @@ if (isset($_SESSION['user'])) {
         <button type="submit">login</button>
     </form>
     <?php
-    // $users = UserController::getUsers();
-    // foreach ($users as $user) {
-    //     echo $user->username;
-    // }
-    // if ($_POST && isset($_POST['username'])) {
-    //     UserController::login();
-    // } else {
-    //     echo $_SESSION['message'];
-    // }
+
+    if ($_SERVER['REQUEST_METHOD'] == "POST") {
+        UserController::login();
+        unset($_POST);
+    }
     ?>
 
 </body>
