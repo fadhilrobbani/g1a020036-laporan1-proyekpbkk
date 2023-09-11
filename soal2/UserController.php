@@ -3,43 +3,56 @@
 // Mendefinisikan namespace `Controller`
 namespace Controller;
 
-// Mengimpor kelas `User` dari namespace `Model`
-use Model\User;
+use Utils\Database;
 
 class UserController
 {
     // Method `getUsers()` yang mengembalikan daftar objek User
-    //Kita masukkan User secara langsung karena kita tidak menggunakan database
+    //Kita masukkan data users dari kelas Database;
     public static function getUsers()
     {
-        return [
-            new User('fadhil', 'password'),
-            new User('patrick', 'star'),
-            new User('squidwood', 'tenpoles')
-        ];
+        return Database::users();
+    }
+
+    //Method 'getUsersByUsername()' mengembalikan satu objek user yang sesuai, jika tidak return null
+    public static function getUserByUsername($username)
+    {
+        //Menggunakan looping untuk iterasi tiap user
+        foreach (self::getUsers() as $user) {
+            //Membandingkan antara username di database dan username dari parameter
+            if ($user->username == $username) {
+                //Jika sesuai maka kembalikan objek user
+                return $user;
+            }
+        }
+        //Jika tidak terdapat kecocokan username, maka kembalikan null
+        return null;
     }
 
     // Method `login()` untuk melakukan proses login
     public static function login()
     {
-        // Memanggil method `getUsers()` untuk mendapatkan daftar pengguna
-        $users = self::getUsers();
 
-        // Iterasi melalui daftar pengguna
-        foreach ($users as $user) {
-            // Memeriksa apakah username dan password yang dikirimkan melalui POST cocok dengan salah satu pengguna
-            if ($_POST['username'] == $user->username && $_POST['password'] == $user->password) {
-                // Jika cocok, simpan username pengguna dalam session dan set pesan sukses
-                $_SESSION['user'] = $user;
-                $_SESSION['message'] = 'Login success';
+        //Mengecek apakah username terdaftar di database
+        $user = self::getUserByUsername($_POST['username']);
+        //Jika tidak maka kembalikan respon gagal dan return untuk menghentikan method
+        if (is_null($user)) {
+            $_SESSION['message'] = 'User not registered. Please register before login (Contact to admin)';
+            return;
+        }
 
-                // Redirect ke halaman home.php
-                header('Location: /home.php');
-                exit();
-            } else {
-                // Jika tidak cocok, set pesan login gagal
-                $_SESSION['message'] = 'Login failed';
-            }
+        //Jika iya maka lakukan pengecekan untuk password
+        if ($user->password == $_POST['password']) {
+            //Jika password benar maka kirim session user dan message kalau login sukses
+            $_SESSION['user'] = $user;
+            $_SESSION['message'] = 'Login success';
+
+            // Redirect ke halaman home.php
+            header('Location: /home.php');
+            exit();
+        } else {
+            //Jika password salah maka kirimkan session message kalau login gagal
+            $_SESSION['message'] = 'Login failed. Please try again';
         }
     }
 

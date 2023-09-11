@@ -1,10 +1,8 @@
 <?php
 //Memuat namespace atau package berikut untuk mengakses UserController
 use Controller\UserController;
-
-//Memuat file kelas yang dibutuhkan. Biasanya bisa kita gunakan fitur autoload agar tidak perlu repot-repot mengimpor satu-satu, tetapi merepotkan untuk diimplementasikan di proyek yang kelasnya sedikit ini
-require_once('UserController.php');
-require_once("User.php");
+//Memuat file autoload
+require_once('autoload.php');
 //Memulai session
 session_start();
 $loggedUser = $_SESSION['user'];
